@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "vazonao",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.andydevlabs.Vazonao"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,8 +30,8 @@
       "expo-router"
     ],
     "experiments": {
-			"typedRoutes": true,
-			"tsconfigPaths": true
-		}
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    }
   }
 }
