@@ -7,8 +7,8 @@ export default function TabLayout() {
 			<Tabs
 				screenOptions={{
 					headerShown: false,
-					tabBarActiveTintColor: "#000",
-					tabBarInactiveTintColor: "#000",
+					tabBarActiveTintColor: '#000',
+					tabBarInactiveTintColor: '#000',
 					tabBarLabelStyle: {
 						display: 'flex',
 						fontSize: 11,
@@ -20,7 +20,7 @@ export default function TabLayout() {
 						paddingTop: 6,
 						marginBottom: 10,
 						marginHorizontal: 10,
-						backgroundColor: 'rgb(46, 46, 46)',
+						backgroundColor: '#c9df8a',
 						height: '8.5%',
 						display: 'flex',
 						justifyContent: 'space-evenly',
