@@ -1,6 +1,5 @@
 import { headerOptions } from '@/constants/layout'
 import { Stack } from 'expo-router'
-import { StyleSheet, View } from 'react-native'
 
 export default function HomeSongLayout() {
 	return (
