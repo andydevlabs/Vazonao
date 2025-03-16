@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
@@ -12,6 +12,8 @@ const blurhash =
 
 export default function TrackList() {
     const [audioFiles, setAudioFiles] = useState<AudioAsset[]>([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredAudioFiles, setFilteredAudioFiles] = useState<AudioAsset[]>([]);
 
     useEffect(() => {
         MediaLibrary.requestPermissionsAsync()
@@ -33,6 +35,13 @@ export default function TrackList() {
             })
             .catch(console.error);
     }, []);
+
+    useEffect(() => {
+        const filtered = audioFiles.filter(file =>
+            file.filename.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredAudioFiles(filtered);
+    }, [searchQuery, audioFiles]);
 
     const renderItem = ({ item }: { item: AudioAsset }) => {
         const minutes = Math.floor(item.duration / 60);
@@ -56,8 +65,10 @@ export default function TrackList() {
                     transition={300}
                 />
                 <View style={styles.textContainer}>
-                    <Text style={styles.filename}>{item.filename}</Text>
-                    <Text style={styles.duration}>{formattedDuration}</Text>
+                    <Text numberOfLines={1} style={styles.filename}>
+                        {item.filename}</Text>
+                    <Text style={styles.duration}>
+                        {formattedDuration}</Text>
                 </View>
             </Pressable>
         );
@@ -65,8 +76,15 @@ export default function TrackList() {
 
     return (
         <View style={styles.container}>
+            <TextInput
+                style={styles.searchBar}
+                placeholder="Search songs..."
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                clearButtonMode="while-editing"
+            />
             <FlashList
-                data={audioFiles}
+                data={filteredAudioFiles}
                 renderItem={renderItem}
                 estimatedItemSize={70}
                 keyExtractor={item => item.id}
@@ -106,5 +124,13 @@ const styles = StyleSheet.create({
     duration: {
         fontSize: 14,
         color: '#666',
+    },
+    searchBar: {
+        height: 40,
+        margin: 12,
+        padding: 10,
+        borderRadius: 8,
+        backgroundColor: '#f0f0f0',
+        fontSize: 16,
     },
 });
