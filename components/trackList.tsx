@@ -37,8 +37,9 @@ export default function TrackList() {
     }, []);
 
     useEffect(() => {
+        const searchQueryToLowerCase = searchQuery.toLowerCase();
         const filtered = audioFiles.filter(file =>
-            file.filename.toLowerCase().includes(searchQuery.toLowerCase())
+            file.filename.toLowerCase().includes(searchQueryToLowerCase)
         );
         setFilteredAudioFiles(filtered);
     }, [searchQuery, audioFiles]);
@@ -83,12 +84,18 @@ export default function TrackList() {
                 onChangeText={setSearchQuery}
                 clearButtonMode="while-editing"
             />
-            <FlashList
-                data={filteredAudioFiles}
-                renderItem={renderItem}
-                estimatedItemSize={70}
-                keyExtractor={item => item.id}
-            />
+            {filteredAudioFiles.length === 0 ? (
+                <View style={styles.noResultsContainer}>
+                    <Text style={styles.noResultsText}>No results found</Text>
+                </View>
+            ) : (
+                <FlashList
+                    data={filteredAudioFiles}
+                    renderItem={renderItem}
+                    estimatedItemSize={70}
+                    keyExtractor={item => item.id}
+                />
+            )}
         </View>
     );
 }
@@ -102,7 +109,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     itemContainer: {
-        padding: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
         flexDirection: 'row',
@@ -128,9 +136,20 @@ const styles = StyleSheet.create({
     searchBar: {
         height: 40,
         margin: 12,
-        padding: 10,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         borderRadius: 8,
         backgroundColor: '#f0f0f0',
         fontSize: 16,
+    },
+    noResultsContainer: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    noResultsText: {
+        paddingTop: 6,
+        fontSize: 20,
+        color: 'rgb(168, 168, 168)',
     },
 });

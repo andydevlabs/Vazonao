@@ -14,10 +14,12 @@
       "backgroundColor": "#000"
     },
     "ios": {
+      "softwareKeyboardLayoutMode": "pan",
       "supportsTablet": true,
       "bundleIdentifier": "com.andydevlabs.Vazonao"
     },
     "android": {
+      "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000"
