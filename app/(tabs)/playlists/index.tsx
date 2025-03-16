@@ -1,11 +1,9 @@
-import TrackTest from '@/components/trackList'
 import { StyleSheet, Text, View } from 'react-native'
 
 export default function PlaylistsScreen() {
 	return (
 		<>
 			<View style={styles.container}>
-				<TrackTest/>
 			</View>
 		</>
 	)
