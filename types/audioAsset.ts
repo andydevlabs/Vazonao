@@ -3,5 +3,8 @@ export interface AudioAsset {
     filename: string;
     uri: string;
     duration: number;
-    albumCover: number;
+    artwork: string | null;
+    artworkUri: string | null;
 }
+
+
