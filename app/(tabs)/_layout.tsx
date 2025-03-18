@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
+import FloatingTrackPlayer from '@/components/FloatingTrackPlayer'
 
 export default function TabLayout() {
 	return (
-		<>
+		<>			
 			<Tabs
 				screenOptions={{
 					headerShown: false,
@@ -25,6 +26,7 @@ export default function TabLayout() {
 						height: '8.5%',
 						display: 'flex',
 						justifyContent: 'space-evenly',
+						zIndex: 1
 					},
 				}}
 			>
@@ -81,6 +83,7 @@ export default function TabLayout() {
 					)
 				}} />
 			</Tabs>
+			<FloatingTrackPlayer />
 		</>
 	)
 }
