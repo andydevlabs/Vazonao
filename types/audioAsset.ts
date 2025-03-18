@@ -7,6 +7,7 @@ export interface AudioAsset {
     duration: number;
     artwork: string | null;
     artworkUri: string | null;
+    album?: string;
 }
 
 
