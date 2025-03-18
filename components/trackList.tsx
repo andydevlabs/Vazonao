@@ -7,6 +7,9 @@ import * as SecureStore from 'expo-secure-store';
 import { getAssetsAsync, requestPermissionsAsync } from 'expo-music-library';
 import { AudioAsset } from '@/types/audioAsset';
 import placeholderAlbum from '../assets/placeholder-album.png';
+import TrackPlayer, { Track } from 'react-native-track-player';
+
+
 
 const BATCH_SIZE = 5;
 const BATCH_DELAY = 10;
@@ -18,7 +21,6 @@ export default function TrackList() {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [loadedArtwork, setLoadedArtwork] = useState<Set<string>>(new Set());
-    const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
     const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50, minimumViewTime: 300 });
 
     const onViewableItemsChanged = useCallback(({ viewableItems }: { viewableItems: Array<{ item: AudioAsset }> }) => {
@@ -100,6 +102,19 @@ export default function TrackList() {
         }
     }, [processArtworkQueue]);
 
+    const InitializeTrack = async (selectedTrack: AudioAsset): Promise<void> => {
+        await TrackPlayer.reset();
+        await TrackPlayer.add({
+            id: selectedTrack.id,
+            url: selectedTrack.uri,
+            title: selectedTrack.filename,
+            artist: selectedTrack.artist || 'Unknown Artist',
+            artwork: selectedTrack.artworkUri || undefined,
+            duration: selectedTrack.duration
+        });
+        await TrackPlayer.play();
+    };
+
     useEffect(() => {
         requestPermissionsAsync().then(({ status }) => {
             if (status === 'granted') fetchAssets();
@@ -112,7 +127,10 @@ export default function TrackList() {
     }, [searchQuery, audioFiles]);
 
     const renderItem = useCallback(({ item }: { item: AudioAsset }) => (
-        <Pressable onPress={() => { }} style={({ pressed }) => [styles.itemContainer, pressed && { backgroundColor: '#f0f0f0' }]}>
+        <Pressable 
+            onPress={() => InitializeTrack(item)} 
+            style={({ pressed }) => [styles.itemContainer, pressed && { backgroundColor: '#f0f0f0' }]}
+        >
             <Image
                 source={item.artworkUri ? { uri: item.artworkUri } : placeholderAlbum}
                 style={styles.albumCover}

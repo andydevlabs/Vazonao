@@ -4,14 +4,14 @@
     "slug": "Vazonao",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/vazonao-v3.png",
     "scheme": "vazonao",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/placeholder-album.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000"
+      "backgroundColor": "#fff"
     },
     "ios": {
       "softwareKeyboardLayoutMode": "pan",
@@ -21,13 +21,13 @@
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#000"
+        "foregroundImage": "./assets/vazonao-v3.png",
+        "backgroundColor": "#5D8AA8"
       },
       "package": "com.andydevlabs.Vazonao"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/placeholder-album.png"
     },
     "plugins": [
       [
